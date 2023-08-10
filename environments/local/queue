@@ -1,0 +1,9 @@
+[program:yii-queue-worker-local]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/bin/php /app/yii queue/listen --verbose=1 --color=0
+autostart=true
+autorestart=true
+user=ubuntu
+numprocs=2
+redirect_stderr=true
+stdout_logfile=/app/console/runtime/logs/yii-queue-worker.log

@@ -1,0 +1,127 @@
+{
+    "name": "toruinteractive/pie-hard",
+	"display_name": "Pie Hard",
+    "description": "A CMS by Toru Interactive",
+    "type": "project",
+    "license": "PRIVATE",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "toruinteractive/ti-cms": "0.25.0",
+        "urbanindo/yii2-dynamodb": "*",
+        "nnnick/chartjs": "^2.8",
+        "bbsnly/chartjs-php": "^2.2",
+        "2amigos/yii2-chartjs-widget": "~2.0",
+        "bower/chartjs": "^2.1",
+        "eddturtle/direct-upload": "^1.6",
+        "google/apiclient": "^2.4",
+        "box/spout": "^3.0",
+        "nex/yii2-datepicker": "dev-master",
+        "aws/aws-sdk-php": "3.134.6",
+        "clickfwd/yoyo": "0.7.0",
+        "simonbackx/slack-php-webhook": "^1.0",
+        "cron/cron": "^1.6",
+        "2amigos/yii2-tinymce-widget": "^1.1",
+        "raoul2000/yii2-workflow": "^1.2",
+        "soundasleep/html2text": "^2.0",
+        "phpmailer/phpmailer": "^6.6"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "^2.0@dev"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    },
+    "extra": [],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-asset-manager.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-banner.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-blog.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-suggest.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-apps.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-cms.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-export-import.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-page-editor.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-file.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-image.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-login.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-menu.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-navbar.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-notify.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-page.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-search.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-slides.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-superadmin.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-translator.git"
+        },
+        {
+            "type": "git",
+            "url": "git@gitlab.com:ti-cms/ti-video.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "version": "0.0.232"
+}

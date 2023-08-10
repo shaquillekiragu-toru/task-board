@@ -1,0 +1,9 @@
+[
+    "/.ti/*/nginx/*.conf",
+    "/.ti/*/provision/*.sh",
+    "/*/config/*.php",
+    "/environments/*/*/config/*.php",
+    "/environments/index.php",
+    "/gulpfile.babel.js",
+    "/Vagrantfile"
+]  

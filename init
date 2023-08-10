@@ -1,0 +1,269 @@
+#!/usr/bin/env php
+<?php
+
+define ("SCHEMA", 'http');
+define ("DOMAIN", 'local');
+
+/**
+ *
+ *
+ * EG usage `php init --env=Staging`
+ * if you don't supply the environment then Local will be chosen
+ * php init --env=Staging
+ *
+ * @todo: add docs to all functions
+ * @todo: put everything in well named functions so that to level code is just easy to
+ * read/follow function callbacks
+ * @todo: Should this be abstracted? seems generic enough
+ *
+ */
+
+$params = getParams();
+$root = str_replace('\\', '/', __DIR__);
+
+if (file_exists("$root/common/config/bootstrap.php")) {
+	require ("$root/common/config/bootstrap.php");
+} else {
+	define ('VERSION', '0.0.0');
+	define ('APP_SLUG', 'application');
+}
+
+if (!extension_loaded('openssl')) {
+	die('The OpenSSL PHP extension is required by Yii2.');
+}
+
+//Get environment, either from user input (which is checked) or default to local
+$envs = require("$root/environments/index.php");
+$envNames = array_keys($envs);
+echo "Yii Application Initialization Tool v1.0\n\n";
+$envName = empty ($params['env']) ? "local" : $params['env'];
+if (!in_array($envName, $envNames)) {
+	$envsList = implode(', ', $envNames);
+	echo "\n	$envName is not a valid environment. Try one of the following: $envsList. \n";
+	exit(2);
+}
+$env = $envs[$envName];
+
+/**
+ * Version of init code. Used to keep init code in sync across projects
+ * you MUST manually increment this when you do ANY work on this file.
+ * @var string
+ */
+$version = VERSION . '-' . APP_SLUG; // ST had to repleace [] with array() as server ran php.5.3!
+
+echo "### INIT START (v" . $version . ") --env=" . $envName . " ###\n";
+$files = getFileList("$root/environments/{$env['path']}");
+if (isset($env['skipFiles'])) {
+		$skipFiles = $env['skipFiles'];
+		array_walk($skipFiles, function(&$value) use($env, $root) { $value = "$root/$value"; });
+		$files = array_diff($files, array_intersect_key($env['skipFiles'], array_filter($skipFiles, 'file_exists')));
+}
+$all = false;
+foreach ($files as $file) {
+		if (!copyFile($root, "environments/{$env['path']}/$file", $file, $all, $params)) {
+				break;
+		}
+}
+$callbacks = array (
+	'clearAssetsAndRuntimes',
+	'setCookieValidationKey',
+	'setWritable',
+	'setExecutable',
+	'createSymlink'
+);
+
+foreach ($callbacks as $callback) {
+		if (!empty($env[$callback])) {
+				$callback($root, $env[$callback]);
+		}
+}
+
+updateCron ();
+updateQueue ();
+
+echo "### INIT END ###\n\n";
+
+/**
+ * TBD
+ * @param	[type] $root		 [description]
+ * @param	string $basePath [description]
+ * @return [type]					 [description]
+ */
+function getFileList($root, $basePath = '') {
+		$files = array ();
+		$handle = opendir($root);
+		while (($path = readdir($handle)) !== false) {
+				if ($path === '.git' || $path === '.svn' || $path === '.' || $path === '..') {
+						continue;
+				}
+				$fullPath = "$root/$path";
+				$relativePath = $basePath === '' ? $path : "$basePath/$path";
+				if (is_dir($fullPath)) {
+						$files = array_merge($files, getFileList($fullPath, $relativePath));
+				} else {
+						$files[] = $relativePath;
+				}
+		}
+		closedir($handle);
+		return $files;
+}
+
+/**
+ * TBD
+ * @param	[type] $root	 [description]
+ * @param	[type] $source [description]
+ * @param	[type] $target [description]
+ * @param	[type] $all		[description]
+ * @param	[type] $params [description]
+ * @return [type]				 [description]
+ */
+function copyFile($root, $source, $target, &$all, $params) {
+		if (!is_file($root . '/' . $source)) {
+				echo "			 skip $target ($source not exist)\n";
+				return true;
+		}
+		if (is_file($root . '/' . $target)) {
+				if (file_get_contents($root . '/' . $source) === file_get_contents($root . '/' . $target)) {
+						return true;
+				}
+				if ($all) {
+						echo "	overwrite $target\n";
+				} else {
+						echo "	overwrite $target\n";
+						$answer = !empty($params['overwrite']) ? $params['overwrite'] : trim(fgets(STDIN));
+						if (!strncasecmp($answer, 'q', 1)) {
+								return false;
+						} else {
+								if (!strncasecmp($answer, 'y', 1)) {
+										echo "	overwrite $target\n";
+								} else {
+										if (!strncasecmp($answer, 'a', 1)) {
+												echo "	overwrite $target\n";
+												$all = true;
+										} else {
+												echo "			 skip $target\n";
+												return true;
+										}
+								}
+						}
+				}
+				file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
+				return true;
+		}
+		echo "	 generate $target\n";
+		@mkdir(dirname($root . '/' . $target), 0777, true);
+		file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
+		return true;
+}
+
+/**
+ * TBD
+ * @return [type] [description]
+ */
+function getParams() {
+		$rawParams = array ();
+		if (isset($_SERVER['argv'])) {
+				$rawParams = $_SERVER['argv'];
+				array_shift($rawParams);
+		}
+
+		$params = array ('overwrite' => 'yes');
+		foreach ($rawParams as $param) {
+				if (preg_match('/^--(\w+)(=(.*))?$/', $param, $matches)) {
+						$name = $matches[1];
+						$params[$name] = isset($matches[3]) ? $matches[3] : true;
+				} else {
+						$params[] = $param;
+				}
+		}
+		return $params;
+}
+
+/**
+ * Delete & regenerate each module's runtime & web/assets folders, clearing
+ * yii's asset cache when init is run post deployment as well as ensuring there
+ * is a runtime folder available and that both folders can be written in to.
+ * Note: using `rm -rf` locks this script to Unix, which is ok for now.
+ * @param	[String] $root	Path to app root
+ * @param	[Array] $paths array of paths to module folders
+ */
+function clearAssetsAndRuntimes ($root, $paths) {
+	foreach ($paths as $writable) {
+		// Assets Folder
+		$folder = $writable . "/web/assets";
+		echo " regenerate $folder\n";
+		system ('rm -rf ' . escapeshellarg ("$root/$folder"));
+		mkdir ("$root/$folder", 0777, true);
+	}
+}
+
+/**
+ * TBD
+ * @param [type] $root	[description]
+ * @param [type] $paths [description]
+ */
+function setWritable($root, $paths) {
+		foreach ($paths as $writable) {
+				echo "			chmod 0777 $writable\n";
+				@mkdir ("$root/$writable", 0777, true);
+				@chmod("$root/$writable", 0777);
+		}
+}
+
+/**
+ * TBD
+ * @param [type] $root	[description]
+ * @param [type] $paths [description]
+ */
+function setExecutable($root, $paths) {
+		foreach ($paths as $executable) {
+				echo "			chmod 0755 $executable\n";
+				@chmod("$root/$executable", 0755);
+		}
+}
+
+/**
+ * TBD
+ * @param [type] $root	[description]
+ * @param [type] $paths [description]
+ */
+function setCookieValidationKey($root, $paths) {
+		foreach ($paths as $file) {
+				echo "	 generate cookie validation key in $file\n";
+				$file = $root . '/' . $file;
+				$length = 32;
+				$bytes = openssl_random_pseudo_bytes($length);
+				$key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
+				$content = preg_replace('/(("|\')cookieValidationKey("|\')\s*=>\s*)(""|\'\')/', "\\1'$key'", file_get_contents($file));
+				file_put_contents($file, $content);
+		}
+}
+
+/**
+ * TBD
+ * @param	[type] $root	[description]
+ * @param	[type] $links [description]
+ * @return [type]				[description]
+ */
+function createSymlink($root, $links) {
+		foreach ($links as $link => $target) {
+				echo "			symlink " . $root . "/" . $target . " " . $root . "/" . $link . "\n";
+				@mkdir ($root . "/" . $link, 077, true);
+				@rmdir($root . "/" . $link);
+				@symlink($root . "/" . $target, $root . "/" . $link);
+		}
+}
+
+function updateCron () {
+	global $envName;
+	global $root;
+
+	system ("bash $root/update-cron.sh $envName $root");
+}
+
+function updateQueue () {
+	global $envName;
+	global $root;
+
+	system ("bash $root/update-queue.sh $envName $root");
+}
