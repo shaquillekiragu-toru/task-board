@@ -11,6 +11,8 @@ fi
 if test -f "$2/queue"; then
   start_tag=";${1}_start"
   end_tag=";${1}_end"
+  touch /tmp/queue_file
+  touch $supervisord_file_location
   cat $supervisord_file_location > /tmp/queue_file
   if ! grep -Fxq "$start_tag" /tmp/queue_file
   then

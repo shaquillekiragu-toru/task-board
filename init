@@ -258,12 +258,12 @@ function updateCron () {
 	global $envName;
 	global $root;
 
-	system ("bash $root/update-cron.sh $envName $root");
+	@system ("sudo bash $root/update-cron.sh $envName $root");
 }
 
 function updateQueue () {
 	global $envName;
 	global $root;
 
-	system ("bash $root/update-queue.sh $envName $root");
+	@system ("sudo bash $root/update-queue.sh $envName $root");
 }
