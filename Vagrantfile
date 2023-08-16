@@ -10,7 +10,7 @@ $ip = '192.168.56.90'
 $modules = 'www admin api rest'
 
 # Used for box name and domain.
-$slug = 'piehard'
+$slug = 'pizzageddon'
 
 ### Override if you like... ###
 

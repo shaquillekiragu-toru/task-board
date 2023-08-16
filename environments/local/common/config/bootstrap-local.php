@@ -1,6 +1,6 @@
 <?php
 define('ENVIRONMENT', 'local');
-define('DOMAIN', 'piehard.local');
+define('DOMAIN', 'pizzageddon.local');
 define("SCHEMA", 'http');
 define('BUCKET_NAME', 'NOT-SET');
 define('AWS_KEY', 'NOT-SET');

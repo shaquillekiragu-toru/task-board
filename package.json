@@ -1,6 +1,6 @@
 {
-    "name": "pie-hard",
-    "description": "pie-hard",
+    "name": "pizzageddon",
+    "description": "pizzageddon",
     "scripts": {
         "postinstall": "cp .ti/hooks/* .git/hooks; chmod 755 .git/hooks/*;",
         "ti-shell": "node node_modules/ti-shell/index.js"

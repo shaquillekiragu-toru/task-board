@@ -1,6 +1,6 @@
 {
-    "name": "toruinteractive/pie-hard",
-	"display_name": "Pie Hard",
+    "name": "toruinteractive/pizzageddon",
+	"display_name": "Pizzageddon",
     "description": "A CMS by Toru Interactive",
 	"modules": "admin api common console rest www",
     "type": "project",

@@ -1,11 +1,11 @@
-# Pie Hard
+# Pizzageddon
 
 Next nicely refactored version of Chainsaw.
 
 ## URLs
 
- * http://admin.pihard.local
- * http://www.pihard.local
+ * http://admin.pizzageddon.local
+ * http://www.pizzageddon.local
 
 ## Development
 
