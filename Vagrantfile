@@ -10,7 +10,7 @@ $ip = '192.168.56.90'
 $modules = 'www admin api rest'
 
 # Used for box name and domain.
-$slug = 'pizzageddon'
+$slug = 'yii2-task-board-app'
 
 ### Override if you like... ###
 
@@ -37,8 +37,9 @@ $post_up_message = ""
 
 ############################################################
 require 'open-uri'
-open('./.ti/local/provision/vagrantfile.rb', 'wb') do |file|
-  file << open('https://s3.eu-west-2.amazonaws.com/toru-static-sites/base-boxes/web_development_'+$box_version+'/vagrantfile.rb').read
+if File.exist?('./.ti/local/provision/vagrantfile.rb') == false then
+  open('./.ti/local/provision/vagrantfile.rb', 'wb') do |file|
+    file << open('https://s3.eu-west-2.amazonaws.com/toru-static-sites/base-boxes/web_development_'+$box_version+'/'+$arch+'/vagrantfile.rb').read
+  end
 end
 load './.ti/local/provision/vagrantfile.rb'
-############################################################

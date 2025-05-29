@@ -1,29 +1,33 @@
 {
-    "name": "pizzageddon",
-    "description": "pizzageddon",
-    "scripts": {
-        "postinstall": "cp .ti/hooks/* .git/hooks; chmod 755 .git/hooks/*;",
-        "ti-shell": "node node_modules/ti-shell/index.js"
-    },
-    "devDependencies": {
-        "gulp": "^4.0.2",
-        "gulp-babel": "^8.0.0",
-        "gulp-dart-sass": "^1.0.2",
-        "gulp-imports": "0.0.3",
-        "gulp-rename": "^2.0.0",
-        "ti-shell": "git+ssh://git@gitlab.com/ti-shell/ti-shell#1.8.1"
-    },
-    "dependencies": {
-        "@babel/core": "^7.17.5",
-        "babel-core": "6.21.0",
-        "babel-preset-es2015": "6.6.0",
-        "babel-register": "6.7.2",
-        "google-closure-compiler": "20180716.0.1",
-        "gulp-cached": "1.1.1",
-        "gulp-flatten": "0.4.0",
-        "gulp-livereload": "4.0.2",
-        "worker-farm": "1.7.0",
-        "yuicompressor": "2.4.8"
-    },
-    "version": "0.0.232"
+	"name": "yii2-task-board-app",
+	"description": "yii2-task-board-app",
+	"scripts": {
+		"postinstall": "cp .ti/hooks/* .git/hooks; chmod 755 .git/hooks/*;",
+		"ti-shell": "node node_modules/ti-shell/index.js"
+	},
+	"devDependencies": {
+		"gulp": "^4.0.2",
+		"gulp-babel": "^8.0.0",
+		"gulp-dart-sass": "^1.0.2",
+		"gulp-imports": "0.0.3",
+		"gulp-rename": "^2.0.0",
+		"ti-shell": "git+ssh://git@bitbucket.org:toru-digital/ti-shell.git#1.8.8"
+	},
+	"dependencies": {
+		"@babel/core": "^7.17.5",
+		"babel-core": "6.21.0",
+		"babel-preset-es2015": "6.6.0",
+		"babel-register": "6.7.2",
+		"google-closure-compiler": "20180716.0.1",
+		"gulp-cached": "1.1.1",
+		"gulp-flatten": "0.4.0",
+		"gulp-livereload": "4.0.2",
+		"worker-farm": "1.7.0",
+		"yuicompressor": "2.4.8"
+	},
+	"version": "0.0.232",
+	"main": "gulpfile.babel.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }

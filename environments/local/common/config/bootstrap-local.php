@@ -1,6 +1,6 @@
 <?php
 define('ENVIRONMENT', 'local');
-define('DOMAIN', 'pizzageddon.local');
+define('DOMAIN', 'yii2-task-board-app.local');
 define("SCHEMA", 'http');
 define('BUCKET_NAME', 'NOT-SET');
 define('AWS_KEY', 'NOT-SET');

@@ -1,4 +1,4 @@
-# Pizzageddon
+# yii2-task-board-app
 
 This repo contains an example starting project / learning resource for a toru yii project.
 
@@ -6,14 +6,15 @@ This project uses [vagrant](https://www.vagrantup.com) to run a virtualised [web
 
 ## URLs
 
- * http://admin.pizzageddon.local
- * http://www.pizzageddon.local
+- http://admin.yii2-task-board-app.local
+- http://www.yii2-task-board-app.local
 
 ## Requirements
-* A virtual machine, either [Virtualbox](https://www.virtualbox.org) or [Parallels](https://www.parallels.com)
-* [Vagrant](https://www.vagrantup.com)
-* [Parallels Provider](https://parallels.github.io/vagrant-parallels/docs/) if parallels is used
-* [Vagrant Hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager)
+
+- A virtual machine, either [Virtualbox](https://www.virtualbox.org) or [Parallels](https://www.parallels.com)
+- [Vagrant](https://www.vagrantup.com)
+- [Parallels Provider](https://parallels.github.io/vagrant-parallels/docs/) if parallels is used
+- [Vagrant Hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager)
 
 ## Development
 
@@ -44,4 +45,3 @@ app
 php init;
 php yii migrate;
 ```
-
