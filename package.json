@@ -3,7 +3,8 @@
 	"description": "yii2-task-board-app",
 	"scripts": {
 		"postinstall": "cp .ti/hooks/* .git/hooks; chmod 755 .git/hooks/*;",
-		"ti-shell": "node node_modules/ti-shell/index.js"
+		"ti-shell": "node node_modules/ti-shell/index.js",
+		"tailwind": "npx tailwindcss -i ./www/assets/css/tailwind.css -o ./www/assets/css/tailwind.css --watch"
 	},
 	"devDependencies": {
 		"gulp": "^4.0.2",
@@ -11,7 +12,7 @@
 		"gulp-dart-sass": "^1.0.2",
 		"gulp-imports": "0.0.3",
 		"gulp-rename": "^2.0.0",
-		"ti-shell": "git+ssh://git@bitbucket.org:toru-digital/ti-shell.git#1.8.8"
+		"ti-shell": "https://github.com/shaquillekiragu-toru/task-board.git"
 	},
 	"dependencies": {
 		"@babel/core": "^7.17.5",
