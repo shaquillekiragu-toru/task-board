@@ -9,5 +9,9 @@
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"tailwind": "^4.0.0",
+		"tailwindcss": "^4.1.8"
+	}
 }
