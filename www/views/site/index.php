@@ -18,8 +18,8 @@ use yii\helpers\Url;
                 <h2 class="w-full text-center text-2xl font-bold mb-5"><?= $status ?></h2>
                 <?php foreach ($tasks as $task) : ?>
                     <div class="w-full flex flex-col gap-6 p-4 border border-black rounded-lg bg-white">
-                        <div class="w-full flex justify-between">
-                            <p class="text-sm text-blue-500"><?= $task->assigned_user_id ?></p>
+                        <div class="w-full flex justify-around">
+                            <p class="text-sm text-gray-500">Created: <?= $task->created_at ?></p>
                             <p class="text-sm text-gray-500">Due: <?= $task->due_date ?></p>
                         </div>
                         <div class="w-full flex justify-center">
@@ -27,6 +27,9 @@ use yii\helpers\Url;
                         </div>
                         <div class="w-full flex justify-start">
                             <p class="text-sm text-gray-500"><?= $task->description ?></p>
+                        </div>
+                        <div class="w-full flex justify-center">
+                            <p class="text-md text-blue-500">Assigned to: <?= $task->assigned_user_id ?></p>
                         </div>
                         <div class="w-full flex justify-between">
                             <a href="<?= Url::to(['task/update', 'id' => $task->id]) ?>" class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</a>
