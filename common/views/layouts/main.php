@@ -13,7 +13,7 @@ $this->registerJs('var access_token="' . $access_token . '";', View::POS_HEAD, '
 $this->beginPage();
 ?>
 <!DOCTYPE html>
-<html lang='<?= Yii::$app->language ?>' class='bg-base-300 preview' data-theme-force='winter' data-theme="<?= 'winter' /*key_exists('data-set-theme', $_COOKIE) ? $_COOKIE['data-set-theme'] : 'wireframe'*/?>">
+<html lang='<?= Yii::$app->language ?>' class='bg-base-300 preview' data-theme-force='winter' data-theme="<?= 'winter' /*key_exists('data-set-theme', $_COOKIE) ? $_COOKIE['data-set-theme'] : 'wireframe'*/ ?>">
 
 <head>
 	<meta charset='<?= Yii::$app->charset ?>' />

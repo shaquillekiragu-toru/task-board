@@ -2,20 +2,24 @@
 
 namespace rest\models;
 
-class User extends \common\models\User {
+class User extends \common\models\User
+{
 
 	/* @inheritdoc */
-	public function getTitle(): string {
+	public function getTitle(): string
+	{
 		return $this->full_name ?? '';
 	}
 
 	/* @inheritdoc */
-	public function getSubtitle(): string {
+	public function getSubtitle(): string
+	{
 		return $this->email ?? '';
 	}
 
 	/* @inheritdoc */
-	public function getLiveedit(): array {
+	public function getLiveedit(): array
+	{
 		return array_merge(
 			parent::getLiveedit(),
 			[
@@ -25,7 +29,8 @@ class User extends \common\models\User {
 	}
 
 	/* @inheritdoc */
-	public function getButtons(): array {
+	public function getButtons(): array
+	{
 		return [
 			[
 				"label" => "Edit",
@@ -40,11 +45,8 @@ class User extends \common\models\User {
 		];
 	}
 
-	public function get_thumbnail() {
-		return $this->profilePicture;
-	}
-
-	public function makeFilters() {
+	public function makeFilters()
+	{
 		return array_merge(parent::makeFilters(), [
 			[
 				'label' => 'Active',
@@ -62,46 +64,12 @@ class User extends \common\models\User {
 					]
 				]
 			],
-			[
-				'key' => 'organisation',
-				'label' => 'Organisation',
-				'type' => 'select',
-				'empty' => 'Any Organisation',
-				'options' => Organisation::find()
-					->select([
-						'id AS value',
-						'title AS label',
-					])
-					->orderBy([
-						'title' => SORT_ASC
-					])
-					->asArray()
-					->all()
-			]
 		]);
 	}
 
 	/* @inheritdoc */
-	public function makeTableFilters(): array {
-		return array_merge(parent::makeTableFilters(), [
-			[
-				'key' => Organisation::getSearchFilterKey(),
-				'label' => 'Organisation',
-				'empty' => 'Any Organisation',
-				'type' => 'select',
-				'options' => Organisation::find()
-					->select([
-						'id AS value',
-						'title AS label',
-					])
-					->asArray()
-					->all()
-			]
-		]);
-	}
-
-	/* @inheritdoc */
-	public function getStatus(): array {
+	public function getStatus(): array
+	{
 		$status = [];
 
 		$status[] = [

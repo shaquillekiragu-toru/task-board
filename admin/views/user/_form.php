@@ -1,19 +1,9 @@
 <?php
 
-use common\models\Organisation;
 use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$organisations = Organisation::find()
-	->select([
-		'id',
-		'title'
-	])
-	->asArray()
-	->all();
-
-$organisations = array_column($organisations, 'title', 'id');
 
 ?>
 <br>

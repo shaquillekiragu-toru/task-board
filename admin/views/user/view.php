@@ -6,12 +6,11 @@ $this->title = $model->first_name . " " . $model->last_name;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => Url::to('/user')];
 $this->params['breadcrumbs'][] = $this->title;
 
-if ($model->canBeDeleted) {
-	$this->params['actions'][] = [
-		'icon' => 'trash',
-		'url' => Url::to('/user/delete/' . $model->id),
-	];
-}
+$this->params['actions'][] = [
+	'icon' => 'trash',
+	'url' => Url::to('/user/delete/' . $model->id),
+];
+
 ?>
 <div class="container">
 	<?= $this->render('_tabs', ['tab' => $tab, 'model' => $model]); ?>

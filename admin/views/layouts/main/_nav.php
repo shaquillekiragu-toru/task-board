@@ -19,12 +19,6 @@ if (!Yii::$app->user->isGuest) {
 			'icon' => 'icon-bubble'
 		],
 		[
-			'label' => \Yii::t('app', 'Integrations'),
-			'url' => ADMIN . '/integration',
-			'active' => $active_id === 'integration',
-			'icon' => 'icon-bubble'
-		],
-		[
 			'label' => \Yii::t('app', 'Save'),
 			'url' => ADMIN . '/save',
 			'active' => $active_id === 'save',
@@ -46,15 +40,11 @@ if (!Yii::$app->user->isGuest) {
 			'label' => \Yii::t('app', 'my_account'),
 			'url' => ADMIN . '/user/view/' . Yii::$app->user->id
 		],
+		[
+			'label' => \Yii::t('app', 'www'),
+			'url' => WWW
+		],
 		['label' => '---'],
-		[
-			'label' => \Yii::t('app', 'goto client'),
-			'url' => CLIENT
-		],
-		[
-			'label' => \Yii::t('app', 'goto staff'),
-			'url' => STAFF
-		],
 		[
 			'label' => \Yii::t('app', 'goto superadmin'),
 			'url' => ADMIN . '/super'

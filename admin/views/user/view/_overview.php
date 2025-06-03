@@ -40,14 +40,6 @@ use yii\helpers\Url;
 		</td>
 	</tr>
 
-	<tr>
-		<th>
-			<?= $model->getAttributeLabel('reset_password_on_signin'); ?>
-		</th>
-		<td>
-			<?= $model->reset_password_on_signin ? 'Yes' : 'No'; ?>
-		</td>
-	</tr>
 </table>
 
 <div class="pull-right">

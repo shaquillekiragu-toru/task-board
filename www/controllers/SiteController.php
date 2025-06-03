@@ -2,31 +2,16 @@
 
 namespace www\controllers;
 
-class SiteController extends \common\controllers\SiteController {
+class SiteController extends \TiCMS\controllers\WebController
+{
 
-	/** @inheritdoc */
-	public function behaviors() {
-		return array_merge_recursive(parent::behaviors(), [
-			'access' => [
-				'rules' => [
-					[
-						'actions' => [
-							'index',
-							'search',
-						],
-						'allow' => true,
-						'roles' => [
-							'admin'
-						]
-					],
-					[
-						'actions' => [
-							'*'
-						],
-						'allow' => false,
-					]
-				]
-			]
-		]);
+	public function actionIndex()
+	{
+		return $this->render('index');
+	}
+
+	public function actionTest()
+	{
+		return $this->render('test');
 	}
 }
