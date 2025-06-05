@@ -27,4 +27,13 @@ class Task extends \common\models\RestModel
     {
         return $this->description ?? '';
     }
+
+    /**
+     * Gets the assigned user for this task
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignedUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'assigned_user_id']);
+    }
 }

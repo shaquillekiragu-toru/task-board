@@ -12,7 +12,9 @@ class TaskController extends Controller
 
     public function actionIndex()
     {
-        $tasks = \common\models\Task::find()->all();
+        $tasks = \common\models\Task::find()
+            ->with('assignedUser')
+            ->all();
         $tasksByStatus = [];
 
         foreach ($tasks as $task) {
