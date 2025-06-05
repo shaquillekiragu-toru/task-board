@@ -1,0 +1,42 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$this->title = 'Update Task';
+?>
+
+<div class="container mx-auto">
+    <h1 class="w-full text-center mb-10 text-4xl font-bold"><?= Html::encode($this->title) ?></h1>
+
+    <div class="max-w-2xl mx-auto">
+        <?php $form = ActiveForm::begin(); ?>
+
+        <div class="mb-4">
+            <?= $form->field($task, 'title')->textInput(['class' => 'w-full p-2 border rounded']) ?>
+        </div>
+
+        <div class="mb-4">
+            <?= $form->field($task, 'description')->textarea(['class' => 'w-full p-2 border rounded', 'rows' => 4]) ?>
+        </div>
+
+        <div class="mb-4">
+            <?= $form->field($task, 'status')->dropDownList([
+                'To Do' => 'To Do',
+                'In Progress' => 'In Progress',
+                'Done' => 'Done'
+            ], ['class' => 'w-full p-2 border rounded']) ?>
+        </div>
+
+        <div class="mb-4">
+            <?= $form->field($task, 'due_date')->input('date', ['class' => 'w-full p-2 border rounded']) ?>
+        </div>
+
+        <div class="flex justify-between">
+            <?= Html::submitButton('Save', ['class' => 'bg-blue-500 text-white px-6 py-2 rounded-md']) ?>
+            <?= Html::a('Cancel', ['site/index'], ['class' => 'bg-gray-500 text-white px-6 py-2 rounded-md']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+    </div>
+</div>
