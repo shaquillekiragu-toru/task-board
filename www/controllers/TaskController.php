@@ -9,6 +9,25 @@ use common\models\Task;
 
 class TaskController extends Controller
 {
+
+    public function actionIndex()
+    {
+        $tasks = \common\models\Task::find()->all();
+        $tasksByStatus = [];
+
+        foreach ($tasks as $task) {
+            $status = $task->status ?? 'To Do';
+            if (!isset($tasksByStatus[$status])) {
+                $tasksByStatus[$status] = [];
+            }
+            $tasksByStatus[$status][] = $task;
+        }
+
+        return $this->render('index', [
+            'tasksByStatus' => $tasksByStatus
+        ]);
+    }
+
     public function actionUpdate($id)
     {
         $task = Task::findOne($id);
