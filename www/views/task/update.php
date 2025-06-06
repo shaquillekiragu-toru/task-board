@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 $this->title = 'Update Task';
 ?>
 
-<div class="container mx-auto">
+<div class="max-w-none md:container mx-auto px-10">
     <h1 class="w-full text-center mb-10 text-4xl font-bold"><?= Html::encode($this->title) ?></h1>
 
     <div class="max-w-2xl mx-auto *:flex *:flex-col *:gap-5">
