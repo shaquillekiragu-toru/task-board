@@ -26,7 +26,7 @@ class Task extends \common\models\RestModel
     {
         return array_merge(parent::rules(), [
             [['title', 'description', 'status'], 'string'],
-            [['due_date', 'created_at'], 'integer'],
+            [['created_at'], 'integer'],
             [['assigned_user_id'], 'integer'],
             ['due_date', 'date', 'format' => 'php:Y-m-d', 'timestampAttribute' => 'due_date'],
         ]);
