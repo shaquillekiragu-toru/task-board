@@ -29,7 +29,10 @@ $this->title = 'Update Task';
         </div>
 
         <div>
-            <?= $form->field($task, 'due_date')->input('date', ['class' => 'w-full p-2 border rounded']) ?>
+            <?= $form->field($task, 'due_date')->input('date', [
+                'class' => 'w-full p-2 border rounded',
+                'value' => $task->formattedDueDate
+            ]) ?>
         </div>
 
         <div class="flex justify-between">
