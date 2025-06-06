@@ -4,6 +4,7 @@ namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use Yii;
 
 class Task extends \common\models\RestModel
 {
@@ -67,5 +68,18 @@ class Task extends \common\models\RestModel
     public function getFormattedCreatedAt()
     {
         return $this->created_at ? date('Y-m-d', $this->created_at) : null;
+    }
+
+    public $loggedInID;
+
+    public function init()
+    {
+        parent::init();
+        $this->loggedInID = Yii::$app->user->id;
+    }
+
+    public function isAssignedToCurrentUser(): bool
+    {
+        return $this->assigned_user_id === $this->loggedInID;
     }
 }
