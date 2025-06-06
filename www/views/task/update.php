@@ -9,18 +9,18 @@ $this->title = 'Update Task';
 <div class="container mx-auto">
     <h1 class="w-full text-center mb-10 text-4xl font-bold"><?= Html::encode($this->title) ?></h1>
 
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-2xl mx-auto *:flex *:flex-col *:gap-5">
         <?php $form = ActiveForm::begin(); ?>
 
-        <div class="mb-4">
+        <div>
             <?= $form->field($task, 'title')->textInput(['class' => 'w-full p-2 border rounded']) ?>
         </div>
 
-        <div class="mb-4">
+        <div>
             <?= $form->field($task, 'description')->textarea(['class' => 'w-full p-2 border rounded', 'rows' => 4]) ?>
         </div>
 
-        <div class="mb-4">
+        <div>
             <?= $form->field($task, 'status')->dropDownList([
                 'To Do' => 'To Do',
                 'In Progress' => 'In Progress',
@@ -28,7 +28,7 @@ $this->title = 'Update Task';
             ], ['class' => 'w-full p-2 border rounded']) ?>
         </div>
 
-        <div class="mb-4">
+        <div>
             <?= $form->field($task, 'due_date')->input('date', ['class' => 'w-full p-2 border rounded']) ?>
         </div>
 
