@@ -38,7 +38,7 @@ class TaskController extends Controller
         }
 
         if ($task->load(Yii::$app->request->post()) && $task->save()) {
-            return $this->redirect(['site/index']);
+            return $this->redirect(['task/index']);
         }
 
         return $this->render('update', [
@@ -54,6 +54,6 @@ class TaskController extends Controller
         }
 
         $task->delete();
-        return $this->redirect(['site/index']);
+        return $this->redirect(['task/index']);
     }
 }
