@@ -30,6 +30,19 @@ class TaskController extends Controller
         ]);
     }
 
+    public function actionCreate()
+    {
+        $task = new Task();
+
+        if ($task->load(Yii::$app->request->post()) && $task->save()) {
+            return $this->redirect(['task/index']);
+        }
+
+        return $this->render('create', [
+            'task' => $task
+        ]);
+    }
+
     public function actionUpdate($id)
     {
         $task = Task::findOne($id);
