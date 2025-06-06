@@ -5,16 +5,42 @@ namespace www\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use common\models\Task;
+use yii\filters\AccessControl;
 
 class TaskController extends Controller
 {
+    /* @inheritdoc */
+    public function behaviors(): array
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'create',
+                            'update',
+                            'delete'
+                        ],
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ],
+                    [
+                        'actions' => ['*'],
+                        'allow' => false
+                    ],
+                ],
+            ]
+        ];
+    }
 
     public function actionIndex()
     {
-        $tasks = \common\models\Task::find()
-            ->with('assignedUser')
-            ->all();
+        $tasks = \common\models\Task::find()->all();
+
         $tasksByStatus = [];
 
         foreach ($tasks as $task) {
@@ -66,7 +92,17 @@ class TaskController extends Controller
             throw new NotFoundHttpException('Task not found.');
         }
 
+        if (!$task->isAssignedToCurrentUser()) {
+            throw new ForbiddenHttpException('You are not allowed to delete this task.');
+        }
         $task->delete();
+        Yii::$app->session->setFlash('success', 'Task deleted successfully.');
+
         return $this->redirect(['task/index']);
+    }
+
+    public function actionMyTest($id)
+    {
+        return "Hello World $id";
     }
 }
