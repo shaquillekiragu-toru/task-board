@@ -37,7 +37,7 @@ $this->title = 'Update Task';
 
         <div class="flex justify-between">
             <?= Html::submitButton('Save', ['class' => 'bg-blue-500 text-white px-6 py-2 rounded-md']) ?>
-            <?= Html::a('Cancel', ['site/index'], ['class' => 'bg-gray-500 text-white px-6 py-2 rounded-md']) ?>
+            <?= Html::a('Cancel', ['task/index'], ['class' => 'bg-gray-500 text-white px-6 py-2 rounded-md']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
