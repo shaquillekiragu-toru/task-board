@@ -14,5 +14,5 @@ return [
 	'params' => $params,
 	'layoutPath' => '@common/views/layouts',
 	'layout' => 'main.php',
-	'defaultRoute' => '/site/index',
+	'defaultRoute' => '/task/index',
 ];

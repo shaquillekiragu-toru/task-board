@@ -5,8 +5,17 @@ namespace www\controllers;
 use Yii;
 use yii\web\HttpException;
 
-class SiteController extends \TiCMS\controllers\WebController
+class SiteController extends \TiCMS\controllers\SiteController
 {
+
+	public $owner = null;
+
+	public function actions()
+	{
+		$actions = parent::actions();
+		$actions['login']["viewName"] = '@www/views/site/login';
+		return $actions;
+	}
 
 	public function actionIndex()
 	{
