@@ -14,10 +14,6 @@ class TailwindAsset extends AssetBundle
         '/css/tailwind.css',
     ];
 
-    public $js = [
-        // Add your JavaScript files here
-    ];
-
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset',
