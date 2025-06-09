@@ -78,6 +78,14 @@ class Task extends \common\models\RestModel
         $this->loggedInID = Yii::$app->user->id;
     }
 
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->assigned_user_id = $this->loggedInID;
+        }
+        return parent::beforeSave($insert);
+    }
+
     public function isAssignedToCurrentUser(): bool
     {
         return $this->assigned_user_id === $this->loggedInID;
