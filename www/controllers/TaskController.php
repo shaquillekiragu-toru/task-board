@@ -9,33 +9,33 @@ use yii\web\ForbiddenHttpException;
 use common\models\Task;
 use yii\filters\AccessControl;
 
-class TaskController extends Controller
+class TaskController extends \TiCMS\controllers\WebController
 {
     /* @inheritdoc */
-    public function behaviors(): array
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => [
-                            'index',
-                            'create',
-                            'update',
-                            'delete'
-                        ],
-                        'allow' => true,
-                        'roles' => ['admin']
-                    ],
-                    [
-                        'actions' => ['*'],
-                        'allow' => false
-                    ],
-                ],
-            ]
-        ];
-    }
+    // public function behaviors(): array
+    // {
+    //     return [
+    //         'access' => [
+    //             'class' => AccessControl::className(),
+    //             'rules' => [
+    //                 [
+    //                     'actions' => [
+    //                         'index',
+    //                         'create',
+    //                         'update',
+    //                         'delete'
+    //                     ],
+    //                     'allow' => true,
+    //                     'roles' => ['admin']
+    //                 ],
+    //                 [
+    //                     'actions' => ['*'],
+    //                     'allow' => false
+    //                 ],
+    //             ],
+    //         ]
+    //     ];
+    // }
 
     public function actionIndex()
     {
@@ -56,7 +56,12 @@ class TaskController extends Controller
         ]);
     }
 
-    public function actionCreate()
+    public function getAssignedUserId()
+    {
+        return Task::findOne(Yii::$app->user->id)->getAssignedUserId();
+    }
+
+    public function actionCreate(int $id = 1)
     {
         $task = new Task();
 
@@ -74,6 +79,10 @@ class TaskController extends Controller
         $task = Task::findOne($id);
         if (!$task) {
             throw new NotFoundHttpException('Task not found.');
+        }
+
+        if (!$task->isAssignedToCurrentUser()) {
+            throw new ForbiddenHttpException('You are not allowed to update this task.');
         }
 
         if ($task->load(Yii::$app->request->post()) && $task->save()) {
