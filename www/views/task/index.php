@@ -29,7 +29,7 @@ use yii\helpers\Url;
                             <p class="text-sm text-gray-500"><?= $task->description ?></p>
                         </div>
                         <div class="w-full flex justify-center">
-                            <p class="text-md text-blue-500">Assigned to: <?= $task->assignedUser ? $task->assignedUser->full_name : 'Unassigned' ?></p>
+                            <p class="text-md text-green-500">Assigned to: <?= $task->assignedUser ? $task->assignedUser->full_name : 'Unassigned' ?></p>
                         </div>
                         <div class="w-full flex justify-between">
                             <a href="<?= Url::to(['task/update', 'id' => $task->id]) ?>" class="bg-blue-500 text-white px-4 py-2 rounded-md">Edit</a>
