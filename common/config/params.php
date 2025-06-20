@@ -17,11 +17,4 @@ return [
 		'region' => AWS_REGION,
 		'version' => 'latest'
 	],
-	'notify' => [
-		'email' => [
-			'support-address' => 'support@toru.digital',
-			'sender-address' => 'support@toru.digital',
-			'contact-form-address' => 'support@toru.digital',
-		],
-	],
 ];

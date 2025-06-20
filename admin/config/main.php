@@ -11,20 +11,14 @@ return [
 	'id' => 'admin',
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'admin\controllers',
-	'bootstrap' => ['super'],
-	'modules' => [
-		'super' => [
-			'class' => 'TiSuperadmin\modules\admin\Module',
-		],
-	],
+	'bootstrap' => [],
+	'modules' => [],
 	'components' => [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
 			'enableStrictParsing' => false,
 			'rules' => [
-				'signup' => 'site/signup',
-				'site/<action:\w+>' => 'site/<action>',
 
 				'<controller:(settings)>/<action:[\w\-]+>/<context:[\w\-]+>' => '<controller>/<action>',
 				'<controller:(settings)>/<action:[\w\-]+>/<context:[\w\-]+>/<id:\d+>' => '<controller>/<action>',

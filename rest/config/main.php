@@ -11,14 +11,8 @@ return [
 	'id' => APP_SLUG . '-rest',
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'rest\controllers',
-	'bootstrap' => [
-		'super',
-	],
-	'modules' => [
-		'super' => [
-			'class' => 'TiSuperadmin\modules\rest\Module',
-		],
-	],
+	'bootstrap' => [],
+	'modules' => [],
 	'components' => [
 		'response' => [
 			'format' => yii\web\Response::FORMAT_JSON,
@@ -41,14 +35,7 @@ return [
 			'rules' => [
 				[
 					'class' => 'yii\rest\UrlRule',
-					'controller' => [
-						'email',
-						'link',
-						'menu',
-						'user',
-						'pageeditor',
-						'sitesetting',
-					],
+					'controller' => ['user'],
 					'patterns' => [
 						'OPTIONS options' => 'options',
 
@@ -65,15 +52,6 @@ return [
 						'suggest_list/<id:\d+>' => 'options',
 					]
 				],
-				[
-					'class' => 'yii\rest\UrlRule',
-					'controller' => 'pageeditor',
-					'extraPatterns' => [
-						'interpret' => 'interpret',
-						'blocks' => 'blocks',
-						'config' => 'config'
-					]
-				]
 			]
 		],
 		'assetManager' => [

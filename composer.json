@@ -2,7 +2,7 @@
 	"name": "toruinteractive/yii2-task-board-app",
 	"display_name": "yii2-task-board-app",
 	"description": "A CMS by Toru Interactive",
-	"modules": "admin api common console rest www",
+	"modules": "admin common console rest www",
 	"type": "project",
 	"license": "PRIVATE",
 	"minimum-stability": "dev",

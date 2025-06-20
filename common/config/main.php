@@ -7,49 +7,13 @@ $config = [
 	'bootstrap' => [
 		'log',
 		's3bucket',
-		// 'super',
 		'queue',
 		'TiImage\bootstrap\ImageBootstrap',
 		'TiFile\bootstrap\FileBootstrap',
 		'TiVideo\bootstrap\VideoBootstrap',
 	],
-	'modules' => [
-		// 'super' => [
-		// 	'class' => 'TiSuperadmin\modules\rest\Module',
-		// ],
-	],
+	'modules' => [],
 	'components' => [
-		'i18n' => [
-			'translations' => [
-				'app*' => [
-					'class' => 'yii\i18n\PhpMessageSource',
-					'sourceLanguage' => 'en-GB',
-					'basePath' => '@common/translations',
-					'fileMap' => [
-						'app' => 'app.php',
-						'app/error' => 'error.php',
-					],
-					'on missingTranslation' => function ($event) {
-						$message = $event->message;
-
-						$message = str_replace('_', ' ', $message);
-						$message = str_replace('-', ' ', $message);
-						$message = ucwords($message);
-
-						$event->translatedMessage = $message;
-					},
-				],
-			],
-		],
-		'authClientCollection' => [
-			'class' => 'yii\authclient\Collection',
-			'clients' => [
-				'google' => [
-					'class' => 'yii\authclient\clients\Google',
-					'returnUrl' => THIS_MODULE . '/site/auth?authclient=google',
-				],
-			],
-		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
@@ -103,10 +67,6 @@ $config = [
 				],
 			],
 		],
-		'jwt' => [
-			'class' => \sizeg\jwt\Jwt::class,
-			'key' => 'b9qdy-75t78-ugfht-yo8tu-ho38u-th7t9',
-		],
 		's3bucket' => [
 			'class' => \frostealth\yii2\aws\s3\Storage::class,
 			'defaultAcl' => \frostealth\yii2\aws\s3\Storage::ACL_PUBLIC_READ,
@@ -116,12 +76,6 @@ $config = [
 				'secret' => AWS_SECRET,
 			],
 			'region' => AWS_REGION,
-		],
-		'slack' => [
-			'class' => \common\components\SlackComponent::class,
-		],
-		'email' => [
-			'class' => \common\components\EmailComponent::class,
 		],
 		'assetManager' => [
 			'appendTimestamp' => true,

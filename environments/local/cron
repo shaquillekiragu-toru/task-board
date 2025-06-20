@@ -1,2 +1,0 @@
-* * * * * php /app/yii email/send-email-batch
-* * * * * php /app/yii email/delete-old-emails

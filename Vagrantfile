@@ -7,7 +7,7 @@ $box_version = "2.3.0"
 $ip = '192.168.56.90'
 
 # names of Yii2 apps (we call the modules)
-$modules = 'www admin api rest'
+$modules = 'www admin rest'
 
 # Used for box name and domain.
 $slug = 'yii2-task-board-app'

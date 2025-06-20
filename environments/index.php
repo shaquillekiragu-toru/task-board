@@ -1,6 +1,6 @@
 <?php
 
-$writtableFiles = ['scratch', 'rest/web/tmp', 'api/web/tmp'];
+$writtableFiles = ['scratch', 'rest/web/tmp'];
 $assetsAndRuntimeModules = [];
 $cookieValidationFiles = [];
 $executableFiles = ['', 'yii', 'init'];

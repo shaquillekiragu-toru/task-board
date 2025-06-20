@@ -7,7 +7,6 @@ $user = Yii::$app->user->identity;
 $access_token = $user ? $user->access_token : 'NOPE';
 $this->registerJs('var admin_url="' . ADMIN . '";', View::POS_HEAD, 'admin-url');
 $this->registerJs('var rest_url="' . REST . '";', View::POS_HEAD, 'rest-url');
-$this->registerJs('var api_url="' . API . '";', View::POS_HEAD, 'api-url');
 $this->registerJs('var access_token="' . $access_token . '";', View::POS_HEAD, 'access-token');
 
 $this->beginPage();
