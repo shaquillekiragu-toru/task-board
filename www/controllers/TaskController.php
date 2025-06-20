@@ -11,6 +11,29 @@ use yii\filters\AccessControl;
 
 class TaskController extends \TiCMS\controllers\WebController
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'create',
+                            'index',
+                            'view',
+                            'update',
+                            'delete',
+                        ],
+                        'allow' => true,
+                        'roles' => ['user']
+                    ],
+                    ['actions' => ['*'], 'allow' => false],
+                ],
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         $tasks = \common\models\Task::find()->all();

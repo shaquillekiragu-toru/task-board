@@ -136,20 +136,12 @@ if (!Yii::$app->user->isGuest) {
 		[
 			'blank' => true
 		],
-		[
-			'label' => \Yii::t('app', 'client'),
-			'url' => CLIENT
-		],
 		Yii::$app->user->can('admin') ? [
 			'label' => \Yii::t('app', 'admin'),
 			'url' => ADMIN
 		] : null,
 		[
 			'blank' => true
-		],
-		[
-			'label' => \Yii::t('app', 'download') . ' ' . Download::TITLE_DORITO . ' ' . Download::findByTitleAndCreateIfMissing(Download::TITLE_DORITO)->version,
-			'url' => Download::findByTitleAndCreateIfMissing(Download::TITLE_DORITO)->downloadLink
 		],
 		[
 			'blank' => true

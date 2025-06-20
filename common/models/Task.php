@@ -13,16 +13,6 @@ class Task extends \common\models\RestModel
         return '{{%task}}';
     }
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::class,
-                'value' => new Expression('UNIX_TIMESTAMP()'),
-            ],
-        ];
-    }
-
     public function rules()
     {
         return array_merge(parent::rules(), [
@@ -31,16 +21,6 @@ class Task extends \common\models\RestModel
             [['assigned_user_id'], 'integer'],
             ['due_date', 'date', 'format' => 'php:Y-m-d', 'timestampAttribute' => 'due_date'],
         ]);
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title ?? '';
-    }
-
-    public function getSubtitle(): string
-    {
-        return $this->description ?? '';
     }
 
     /**
@@ -70,24 +50,17 @@ class Task extends \common\models\RestModel
         return $this->created_at ? date('Y-m-d', $this->created_at) : null;
     }
 
-    public $loggedInID;
-
-    public function init()
-    {
-        parent::init();
-        $this->loggedInID = Yii::$app->user->id;
-    }
 
     public function beforeSave($insert)
     {
         if ($insert) {
-            $this->assigned_user_id = $this->loggedInID;
+            $this->assigned_user_id = Yii::$app->user->identity->id;
         }
         return parent::beforeSave($insert);
     }
 
     public function isAssignedToCurrentUser(): bool
     {
-        return $this->assigned_user_id === $this->loggedInID;
+        return $this->assigned_user_id === Yii::$app->user->identity->id;
     }
 }

@@ -87,7 +87,6 @@ foreach ($breadcrumbs as $index => $breadcrumb) {
 		<div class="dropdown dropdown-end">
 			<label tabindex="0" class="btn btn-ghost btn-circle avatar mt-1 ml-2">
 				<div class="w-9 h-9 rounded-full">
-					<img src="<?= Yii::$app->user->identity->profilePicture ?>" />
 				</div>
 			</label>
 			<ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52">

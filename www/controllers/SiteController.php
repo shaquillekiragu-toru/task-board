@@ -14,6 +14,7 @@ class SiteController extends \TiCMS\controllers\SiteController
 	{
 		$actions = parent::actions();
 		$actions['login']["viewName"] = '@www/views/site/login';
+		$actions['login']["class"] = 'common\actions\LoginAction';
 		return $actions;
 	}
 

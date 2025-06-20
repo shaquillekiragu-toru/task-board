@@ -9,7 +9,8 @@ use common\models\LoginForm;
  * This action renders the login form and processes it's results.
  * Added to base site controller in  TiCMS\controllers\SiteController
  */
-class LoginAction extends \TiLogin\actions\LoginAction {
+class LoginAction extends \TiLogin\actions\LoginAction
+{
 
 	/**
 	 * The name of the view to render.
@@ -21,7 +22,8 @@ class LoginAction extends \TiLogin\actions\LoginAction {
 	 * @inheritdoc
 	 * @return [type] [description]
 	 */
-	public function run() {
+	public function run()
+	{
 
 		if (!\Yii::$app->user->isGuest) {
 			return $this->controller->goHome();
@@ -31,6 +33,7 @@ class LoginAction extends \TiLogin\actions\LoginAction {
 		$model->forgot = 0;
 
 		if ($model->load(Yii::$app->request->post())) {
+
 			if (isset(Yii::$app->request->post()['LoginForm']['mfaCode'])) {
 				$model->mfaCode = Yii::$app->request->post()['LoginForm']['mfaCode'];
 			}
